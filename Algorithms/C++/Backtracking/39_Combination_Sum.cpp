@@ -21,13 +21,21 @@ private:
             return;
         }
 
+        int prev = -1;
         for (int i = pos; i < candidates.size(); i++) {
             if (candidates[i] > target) {
                 break;
             }
+
+            if (prev == -1 && prev == candidates[i]) {
+                continue;
+            }
+
             cur.push_back(candidates[i]);
             helper(combinations, cur, i, candidates, target - candidates[i]);
             cur.pop_back();
+
+            prev = candidates[i];
         }
     }
 };
