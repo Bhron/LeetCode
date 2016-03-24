@@ -14,8 +14,6 @@ public:
             }
         }
 
-
-
         for (int i = 0; i < min_len; i++) {
             for (int j = 1; j < strs.size(); j++) {
                 if (strs[j][i] != strs[0][i]) {
