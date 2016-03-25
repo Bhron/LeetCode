@@ -1,17 +1,19 @@
 class Solution {
 public:
-    int removeElement(vector<int>& nums, int val) {
+    void moveZeroes(vector<int>& nums) {
         if (nums.empty()) {
-            return 0;
+            return;
         }
 
         int start = 0;
         for (int i = 0; i < nums.size(); i++) {
-            if (nums[i] != val) {
+            if (nums[i] != 0) {
                 nums[start++] = nums[i];
             }
         }
 
-        return start;
+        for (int i = nums.size() - 1, j = 0; j < nums.size() - start; i--, j++) {
+            nums[i] = 0;
+        }
     }
 };
