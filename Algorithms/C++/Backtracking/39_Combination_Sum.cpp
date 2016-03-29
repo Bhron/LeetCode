@@ -27,7 +27,7 @@ private:
                 break;
             }
 
-            if (prev == -1 && prev == candidates[i]) {
+            if (prev != -1 && prev == candidates[i]) {
                 continue;
             }
 
