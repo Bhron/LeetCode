@@ -6,6 +6,8 @@
  *     RandomListNode(int x) : label(x), next(NULL), random(NULL) {}
  * };
  */
+
+// Hash Table
 class Solution {
 public:
     RandomListNode *copyRandomList(RandomListNode *head) {
@@ -46,5 +48,52 @@ private:
             new_node->random = hash[head->random];
             head = head->next;
         }
+    }
+};
+
+// O(1) space
+class Solution {
+public:
+    RandomListNode *copyRandomList(RandomListNode *head) {
+        if (head == NULL) {
+            return NULL;
+        }
+
+        copy_next(head);
+        copy_random(head);
+        return split(head);
+    }
+private:
+    void copy_next(RandomListNode* head) {
+        while (head != NULL) {
+            RandomListNode* new_node = new RandomListNode(head->label);
+            new_node->next = head->next;
+            head->next = new_node;
+            head = new_node->next;
+        }
+    }
+
+    void copy_random(RandomListNode* head) {
+        while (head != NULL) {
+            RandomListNode* new_node = head->next;
+            if (head->random != NULL) {
+                new_node->random = head->random->next;
+            }
+            head = head->next->next;
+        }
+    }
+
+    RandomListNode *split(RandomListNode* head) {
+        RandomListNode dummy(0);
+        RandomListNode* node = &dummy;
+
+        while (head != NULL) {
+            node->next = head->next;
+            head->next = head->next->next;
+            node = node->next;
+            head = head->next;
+        }
+
+        return dummy.next;
     }
 };
