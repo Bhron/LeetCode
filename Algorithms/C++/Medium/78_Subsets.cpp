@@ -27,7 +27,35 @@ private:
     }
 };
 
-// Non-Recursion
+// Non-Recursion  Array
+class Solution {
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> all_subsets;
+
+        if (nums.size() == 0) {
+            return all_subsets;
+        }
+
+        sort(nums.begin(), nums.end());
+
+        vector<int> cur;
+        all_subsets.push_back(cur);
+
+        for (int i = 0; i < nums.size(); i++) {
+            int n = all_subsets.size();
+            for (int j = 0; j < n; j++) {
+                cur = all_subsets[j];
+                cur.push_back(nums[i]);
+                all_subsets.push_back(cur);
+            }
+        }
+
+        return all_subsets;
+    }
+};
+
+// Non-Recursion  Bit Manipulation
 class Solution {
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
