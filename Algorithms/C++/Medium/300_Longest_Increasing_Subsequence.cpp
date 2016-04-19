@@ -12,13 +12,11 @@ public:
         for (int i = 0; i < n; i++) {
             F[i] = 1;
             for (int j = 0; j < i; j++) {
-                if (nums[j] <= nums[i]) {
+                if (nums[j] < nums[i]) {
                     F[i] = max(F[i], F[j] + 1);
                 }
             }
-            if (F[i] > max_len) {
-                max_len = F[i];
-            }
+            max_len = max(F[i], max_len);
         }
 
         return max_len;
