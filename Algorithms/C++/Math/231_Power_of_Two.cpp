@@ -1,0 +1,1 @@
+../Easy/231_Power_of_Two.cpp
