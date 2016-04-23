@@ -1,0 +1,1 @@
+../Easy/28_Implement_strStr().cpp
