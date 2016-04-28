@@ -1,0 +1,1 @@
+../Medium/31_Next_Permutation.cpp
