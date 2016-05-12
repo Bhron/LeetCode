@@ -1,3 +1,4 @@
+// BFS
 class Solution {
 public:
     bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
@@ -59,5 +60,71 @@ private:
         }
 
         return nodes;
+    }
+};
+
+// DFS
+class Solution {
+public:
+    bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
+        if (numCourses <= 1 || prerequisites.size() <= 1) {
+            return true;
+        }
+
+        vector<DirectedGraphNode*> nodes = construct_graph(numCourses, prerequisites);
+
+        vector<int> visited(numCourses, 0);
+        for (int i = 0; i < nodes.size(); i++) {
+            DirectedGraphNode* node = nodes[i];
+            if (visited[node->label] == 0) {
+                if (DFS(nodes, visited, node) == false) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+private:
+    class DirectedGraphNode {
+    public:
+        int label;
+        unordered_set<int> neighbors;
+
+        DirectedGraphNode(int label) : label(label) { }
+    };
+
+    vector<DirectedGraphNode*> construct_graph(const int n, const vector<pair<int, int>>& prerequisites) {
+        vector<DirectedGraphNode*> nodes;
+        for (int i = 0; i < n; i++) {
+            nodes.push_back(new DirectedGraphNode(i));
+        }
+
+        for (int i = 0; i < prerequisites.size(); i++) {
+            int course = prerequisites[i].first;
+            int prerequisite = prerequisites[i].second;
+            nodes[prerequisite]->neighbors.insert(course);
+        }
+
+        return nodes;
+    }
+
+    bool DFS(vector<DirectedGraphNode*>& nodes, vector<int>& visited, DirectedGraphNode* node) {
+        visited[node->label] = -1;
+
+        for (const auto& neighbor: node->neighbors) {
+            if (visited[neighbor] == -1) {
+                return false;
+            } else if (visited[neighbor] == 0) {
+                if (DFS(nodes, visited, nodes[neighbor]) == false) {
+                    return false;
+                }
+            }
+        }
+
+        visited[node->label] = 1;
+
+        return true;
     }
 };
