@@ -1,0 +1,1 @@
+../Easy/246_Strobogrammatic_Number.swift
