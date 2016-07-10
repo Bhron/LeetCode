@@ -1,0 +1,1 @@
+../Medium/48_Rotate_Image.cpp
