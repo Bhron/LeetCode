@@ -1,4 +1,4 @@
-// Hash Table, Time Complexity O(n)
+// Hash Table, Time Complexity O(n), n is the length of the longer string
 class Solution {
     func isAnagram(s: String, _ t: String) -> Bool {
         if s.characters.count != t.characters.count {
@@ -29,5 +29,19 @@ class Solution {
         }
 
         return true
+    }
+}
+
+// Sort, Time Complexity O(nlogn), n is the length of the longer string
+class Solution {
+    func isAnagram(s: String, _ t: String) -> Bool {
+        if s.characters.count != t.characters.count {
+            return false
+        }
+
+        let sortedS = String(s.characters.sort() { $0 < $1 })
+        let sortedT = String(t.characters.sort() { $0 < $1 })
+
+        return sortedS == sortedT
     }
 }
