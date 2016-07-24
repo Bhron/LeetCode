@@ -1,0 +1,1 @@
+../Easy/205_Isomorphic_Strings.swift
