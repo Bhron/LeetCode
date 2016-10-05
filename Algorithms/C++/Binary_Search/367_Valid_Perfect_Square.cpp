@@ -1,0 +1,1 @@
+../Easy/367_Valid_Perfect_Square.cpp
